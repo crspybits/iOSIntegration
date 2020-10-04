@@ -57,6 +57,7 @@ struct MenuButtonView: View {
         .font(.headline)
         .padding(.top, topPadding)
         .disabled(disable())
+        .opacity(disable() ? 0.5 : 1)
     }
     
     func disable() -> Bool {

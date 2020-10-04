@@ -1,4 +1,7 @@
 # Test procedures
+
+## SharedContainer in iOSShared
+
 ## Upload four image files to server, in background, disconnected from Xcode debugger, with app terminated.
 
 1. Remove the app from iPhone device (to reset the file log).
@@ -16,12 +19,37 @@
 
 ## UI
 
-### Dark mode and sign-in
+## Sharing app extension
 
-#### In dark mode, the individual sign-in buttons are not setup with color correctly.
+See https://dmtopolog.com/ios-app-extensions-data-sharing/
 
-### Tappable area for hamburger menu button is too small
+### Need to use the sign-in that is current for the host app
 
-## Using shared storage for sharing app extension
+### Using shared storage
 
-## What backgroundURLSession identifier gets used in a sharing app extension?
+Every access to files needs to use something like:
+
+extension FileManager {
+  static func sharedContainerURL() -> URL {
+    return FileManager.default.containerURL(
+      forSecurityApplicationGroupIdentifier: "group.com.your.domain"
+    )!
+  }
+}
+
+But what is this? Is it analogous to the Documents directory for an app?
+Note: Access to this is not thread safe. I think a main issue is access to this across the app extension and the host app.
+
+Places that use FileManager and/or files?
+    iOSShared [DONE]
+    iOSIntegration  [DONE]
+    iOSBasics  [DONE]
+        Configuration within this  [DONE]
+    iOSDropbox
+    iOSFacebook
+    PersistentValue  [DONE]
+
+How to access for a SQLite database?
+
+### What backgroundURLSession identifier gets used in a sharing app extension?
+

@@ -9,14 +9,14 @@ import SwiftUI
 import UIKit
 import MessageUI
 
-// From https://stackoverflow.com/questions/56784722/swiftui-send-email
+// Adapted from https://stackoverflow.com/questions/56784722/swiftui-send-email
 
 struct SendMailView: View {
    @State var result: Result<MFMailComposeResult, Error>? = nil
    @State var isShowingMailView = false
 
     var body: some View {
-        MenuNavBar {
+        MenuNavBar(title: "Send Mail")  {
             Button(action: {
                 self.isShowingMailView.toggle()
             }) {
@@ -60,8 +60,7 @@ struct MailView: UIViewControllerRepresentable {
     }
 
     func makeCoordinator() -> Coordinator {
-        return Coordinator(presentation: presentation,
-                           result: $result)
+        return Coordinator(presentation: presentation, result: $result)
     }
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<MailView>) -> MFMailComposeViewController {
@@ -71,7 +70,6 @@ struct MailView: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ uiViewController: MFMailComposeViewController,
-                                context: UIViewControllerRepresentableContext<MailView>) {
-
+        context: UIViewControllerRepresentableContext<MailView>) {
     }
 }

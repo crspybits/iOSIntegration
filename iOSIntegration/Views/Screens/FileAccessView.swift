@@ -18,7 +18,7 @@ extension View {
 
 struct FilesView: View {
     var body: some View {
-        MenuNavBar {
+        MenuNavBar(title: "File Access")  {
             FileAccessView()
         }
     }

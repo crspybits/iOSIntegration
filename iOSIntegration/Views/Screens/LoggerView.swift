@@ -13,9 +13,8 @@ struct LoggerView: View {
     @State private var loggerText: String?
 
     var body: some View {        
-        return MenuNavBar {
+        return MenuNavBar(title: "Logger Text") {
             VStack {
-                Text("Logger Text")
                 TextEditor(text: $loggerText ?? "")
                     .foregroundColor(Color(UIColor.label))
                     .border(Color(UIColor.label))

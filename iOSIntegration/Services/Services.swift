@@ -3,12 +3,16 @@ import iOSSignIn
 import iOSShared
 import ServerShared
 import iOSBasics
+import PersistentValue
 
 enum ServicesError: Error {
     case noDocumentDirectory
 }
 
 class Services {
+    // You must use the App Groups Entitlement and setup a applicationGroupIdentifier https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_security_application-groups
+    let applicationGroupIdentifier = "group.biz.SpasticMuffin.SharedImages"
+    
     // In the documents directory
     let logFileName = "LogFile.txt"
 
@@ -20,6 +24,24 @@ class Services {
     private static let plistServerConfig = ("Server", "plist")
 
     private init() {
+        do {
+            try SharedContainer.appLaunchSetup(applicationGroupIdentifier: applicationGroupIdentifier)
+        } catch let error {
+            logger.error("\(error)")
+            setupFailure = true
+            return
+        }
+        
+        logger.info("SharedContainer.session.sharedContainerURL: \(String(describing: SharedContainer.session?.sharedContainerURL))")
+                
+        guard let documentsURL = SharedContainer.session?.documentsURL else {
+            logger.error("Could not get documentsURL")
+            setupFailure = true
+            return
+        }
+        
+        PersistentValueFile.alternativeDocumentsDirectory = documentsURL.path
+        
         guard let path = Bundle.main.path(forResource: Self.plistServerConfig.0, ofType: Self.plistServerConfig.1) else {
             setupFailure = true
             return
@@ -46,18 +68,13 @@ class Services {
             setupFailure = true
         }
         
-        guard let bundleIdentifier =  Bundle.main.bundleIdentifier else {
+        guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
             logger.error("Could not get bundle identifier")
             setupFailure = true
             return
         }
         
-        do {
-            try setupLogging()
-        } catch let error {
-            logger.error("Could not setup logging: \(error)")
-            setupFailure = true
-        }
+        setupLogging()
         
         // Do this *after* `setupLogging`-- the initial logger created by `iOSShared` doesn't have the file logging setup.
         set(logLevel: .trace)
@@ -102,5 +119,3 @@ extension Services: SignInServicesHelper {
         return signInServices.manager.currentSignIn?.userType
     }
 }
-
-

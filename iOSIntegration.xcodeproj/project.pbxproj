@@ -12,6 +12,8 @@
 		8312BFA62528E019001C5FCF /* Services+LoggingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8312BFA52528E019001C5FCF /* Services+LoggingHelpers.swift */; };
 		8312BFAB2528E855001C5FCF /* LoggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8312BFAA2528E855001C5FCF /* LoggerView.swift */; };
 		8312BFB02528F749001C5FCF /* Cat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8312BFAF2528F749001C5FCF /* Cat.jpg */; };
+		831A7A7325290DAF0087BD4F /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 831A7A7225290DAF0087BD4F /* SideMenu */; };
+		831A7B2525294FCC0087BD4F /* PersistentValue in Frameworks */ = {isa = PBXBuildFile; productRef = 831A7B2425294FCC0087BD4F /* PersistentValue */; };
 		83415C2B251DB91700CBBE81 /* iOSDropbox in Frameworks */ = {isa = PBXBuildFile; productRef = 83415C2A251DB91700CBBE81 /* iOSDropbox */; };
 		83415C31251DB94A00CBBE81 /* iOSFacebook in Frameworks */ = {isa = PBXBuildFile; productRef = 83415C30251DB94A00CBBE81 /* iOSFacebook */; };
 		834C5E66251DB50900C2E8CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C5E65251DB50900C2E8CE /* AppDelegate.swift */; };
@@ -28,7 +30,6 @@
 		834C5EB5251DB86900C2E8CE /* iOSBasics in Frameworks */ = {isa = PBXBuildFile; productRef = 834C5EB4251DB86900C2E8CE /* iOSBasics */; };
 		834C5EBB251DB8B900C2E8CE /* iOSSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 834C5EBA251DB8B900C2E8CE /* iOSSignIn */; };
 		835544E82522E74D00A30A63 /* Services+SignInServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835544E72522E74D00A30A63 /* Services+SignInServices.swift */; };
-		8355451025240D3F00A30A63 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 8355450F25240D3F00A30A63 /* SideMenu */; };
 		8355451625240DB700A30A63 /* LeftMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8355451525240DB700A30A63 /* LeftMenuView.swift */; };
 		8355451E25240E3700A30A63 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8355451D25240E3700A30A63 /* MainView.swift */; };
 		83554524252412F500A30A63 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83554523252412F500A30A63 /* LandingView.swift */; };
@@ -62,6 +63,7 @@
 		8312BFAA2528E855001C5FCF /* LoggerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerView.swift; sourceTree = "<group>"; };
 		8312BFAF2528F749001C5FCF /* Cat.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Cat.jpg; sourceTree = "<group>"; };
 		831A7A632528F9E30087BD4F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		831A7A77252934690087BD4F /* iOSIntegration.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iOSIntegration.entitlements; sourceTree = "<group>"; };
 		834C5E62251DB50900C2E8CE /* iOSIntegration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSIntegration.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		834C5E65251DB50900C2E8CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		834C5E67251DB50900C2E8CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,8 +100,9 @@
 				83415C31251DB94A00CBBE81 /* iOSFacebook in Frameworks */,
 				83415C2B251DB91700CBBE81 /* iOSDropbox in Frameworks */,
 				834C5EBB251DB8B900C2E8CE /* iOSSignIn in Frameworks */,
+				831A7A7325290DAF0087BD4F /* SideMenu in Frameworks */,
+				831A7B2525294FCC0087BD4F /* PersistentValue in Frameworks */,
 				8312BFA12528DF4C001C5FCF /* FileLogging in Frameworks */,
-				8355451025240D3F00A30A63 /* SideMenu in Frameworks */,
 				834C5EB5251DB86900C2E8CE /* iOSBasics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,6 +147,7 @@
 		834C5E64251DB50900C2E8CE /* iOSIntegration */ = {
 			isa = PBXGroup;
 			children = (
+				831A7A77252934690087BD4F /* iOSIntegration.entitlements */,
 				831A7A632528F9E30087BD4F /* README.md */,
 				834C5E65251DB50900C2E8CE /* AppDelegate.swift */,
 				834C5E67251DB50900C2E8CE /* SceneDelegate.swift */,
@@ -258,9 +262,10 @@
 				834C5EBA251DB8B900C2E8CE /* iOSSignIn */,
 				83415C2A251DB91700CBBE81 /* iOSDropbox */,
 				83415C30251DB94A00CBBE81 /* iOSFacebook */,
-				8355450F25240D3F00A30A63 /* SideMenu */,
 				835545292524135E00A30A63 /* SFSafeSymbols */,
 				8312BFA02528DF4C001C5FCF /* FileLogging */,
+				831A7A7225290DAF0087BD4F /* SideMenu */,
+				831A7B2425294FCC0087BD4F /* PersistentValue */,
 			);
 			productName = iOSIntegration;
 			productReference = 834C5E62251DB50900C2E8CE /* iOSIntegration.app */;
@@ -338,9 +343,10 @@
 				834C5EB9251DB8B900C2E8CE /* XCRemoteSwiftPackageReference "iOSSIgnIn" */,
 				83415C29251DB91700CBBE81 /* XCRemoteSwiftPackageReference "iOSDropbox" */,
 				83415C2F251DB94A00CBBE81 /* XCRemoteSwiftPackageReference "iOSFacebook" */,
-				8355450E25240D3F00A30A63 /* XCRemoteSwiftPackageReference "SideMenu" */,
 				835545282524135D00A30A63 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				8312BF9F2528DF4C001C5FCF /* XCRemoteSwiftPackageReference "swift-log-file" */,
+				831A7A7125290DAF0087BD4F /* XCRemoteSwiftPackageReference "SideMenu" */,
+				831A7B2325294FCC0087BD4F /* XCRemoteSwiftPackageReference "PersistentValue" */,
 			);
 			productRefGroup = 834C5E63251DB50900C2E8CE /* Products */;
 			projectDirPath = "";
@@ -570,6 +576,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = iOSIntegration/iOSIntegration.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iOSIntegration/Preview Content\"";
 				DEVELOPMENT_TEAM = BH68R29JBE;
@@ -591,6 +598,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = iOSIntegration/iOSIntegration.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iOSIntegration/Preview Content\"";
 				DEVELOPMENT_TEAM = BH68R29JBE;
@@ -741,6 +749,22 @@
 				kind = branch;
 			};
 		};
+		831A7A7125290DAF0087BD4F /* XCRemoteSwiftPackageReference "SideMenu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SyncServerII/SideMenu.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		831A7B2325294FCC0087BD4F /* XCRemoteSwiftPackageReference "PersistentValue" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "http://github.com/crspybits/PersistentValue.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		83415C29251DB91700CBBE81 /* XCRemoteSwiftPackageReference "iOSDropbox" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "http://github.com/SyncServerII/iOSDropbox.git";
@@ -773,14 +797,6 @@
 				kind = branch;
 			};
 		};
-		8355450E25240D3F00A30A63 /* XCRemoteSwiftPackageReference "SideMenu" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Vidhyadharan-Mohanram/SideMenu.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.0;
-			};
-		};
 		835545282524135D00A30A63 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/piknotech/SFSafeSymbols.git";
@@ -796,6 +812,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8312BF9F2528DF4C001C5FCF /* XCRemoteSwiftPackageReference "swift-log-file" */;
 			productName = FileLogging;
+		};
+		831A7A7225290DAF0087BD4F /* SideMenu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 831A7A7125290DAF0087BD4F /* XCRemoteSwiftPackageReference "SideMenu" */;
+			productName = SideMenu;
+		};
+		831A7B2425294FCC0087BD4F /* PersistentValue */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 831A7B2325294FCC0087BD4F /* XCRemoteSwiftPackageReference "PersistentValue" */;
+			productName = PersistentValue;
 		};
 		83415C2A251DB91700CBBE81 /* iOSDropbox */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -816,11 +842,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 834C5EB9251DB8B900C2E8CE /* XCRemoteSwiftPackageReference "iOSSIgnIn" */;
 			productName = iOSSignIn;
-		};
-		8355450F25240D3F00A30A63 /* SideMenu */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8355450E25240D3F00A30A63 /* XCRemoteSwiftPackageReference "SideMenu" */;
-			productName = SideMenu;
 		};
 		835545292524135E00A30A63 /* SFSafeSymbols */ = {
 			isa = XCSwiftPackageProductDependency;

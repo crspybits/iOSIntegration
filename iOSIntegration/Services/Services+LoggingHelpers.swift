@@ -11,23 +11,14 @@ import FileLogging
 import iOSShared
 
 extension Services {
-    func getDocumentsDirectory() throws -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        guard paths.count > 0 else {
-            throw ServicesError.noDocumentDirectory
-        }
-        
-        return paths[0]
-    }
-    
-    func logFileURL() throws -> URL {
-        return try getDocumentsDirectory().appendingPathComponent(logFileName)
+    private func logFileURL() -> URL {
+        return Files.getDocumentsDirectory().appendingPathComponent(logFileName)
     }
     
     // Subsequent uses of the `logger` will log both to a file and the Xcode console.
     // Only call this once, during app launch.
-    func setupLogging() throws {
-        let loggingURL = try logFileURL()
+    func setupLogging() {
+        let loggingURL = logFileURL()
 
         LoggingSystem.bootstrap { label in
             var handlers = [LogHandler]()
@@ -47,10 +38,7 @@ extension Services {
     }
     
     var currentLogFileContents: String? {
-        guard let url = try? logFileURL() else {
-            logger.error("Could not get log file URL")
-            return nil
-        }
+        let url = logFileURL()
         
         guard let data = try? Data(contentsOf: url) else {
             logger.error("Could not read data from log file URL: \(url)")

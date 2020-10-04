@@ -6,13 +6,13 @@ import SwiftUI
 
 struct LandingView: View {        
     var body: some View {
-        MenuNavBar {
+        MenuNavBar(title: "Sign In") {
             VStack {
                 if Services.session.setupFailure {
                     Text("Setup Failure!")
                         .background(Color.red)
                 }
-                
+
                 Services.session.signInServices.signInView
             }
         }

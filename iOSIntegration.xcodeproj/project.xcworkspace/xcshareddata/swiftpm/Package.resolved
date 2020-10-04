@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/BlueCryptor.git",
         "state": {
           "branch": null,
-          "revision": "12d2bf3ec7207ec3cd004b9582f69ef5fae1da3b",
-          "version": "1.0.32"
+          "revision": "ee5880e031da4c609f372cf7472476ab51d5dd19",
+          "version": "1.0.200"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/Kitura/BlueSocket.git",
         "state": {
           "branch": null,
-          "revision": "c46a3d41f5b2401d18bcb46d0101cdc5cd13e307",
-          "version": "1.0.52"
+          "revision": "c9894fd117457f1d006575fbfb2fdfd6f79eac03",
+          "version": "1.0.200"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/Kitura/BlueSSLService.git",
         "state": {
           "branch": null,
-          "revision": "ab2c2aa2fe574969f391c80ee87746be431dee0e",
-          "version": "1.0.52"
+          "revision": "ae5889d2a8b068d2d3ab91ec73aa8f557c03cd8a",
+          "version": "1.0.200"
         }
       },
       {
@@ -87,7 +87,7 @@
         "repositoryURL": "http://github.com/SyncServerII/iOSDropbox.git",
         "state": {
           "branch": "master",
-          "revision": "0a8f0bbbc274e1ba22d02ba64ca161b1f8d69879",
+          "revision": "74c587f3ce233bc65b3ed4e6f82c3eff50d7d1b4",
           "version": null
         }
       },
@@ -105,7 +105,7 @@
         "repositoryURL": "https://github.com/SyncServerII/iOSShared.git",
         "state": {
           "branch": "master",
-          "revision": "b278cf9ab58c6deecc276b8cc12665fa7063b2c6",
+          "revision": "d2a0ad28f27d8bdd4c3caaf5a24f6429b6f0e722",
           "version": null
         }
       },
@@ -114,7 +114,7 @@
         "repositoryURL": "http://github.com/SyncServerII/iOSSIgnIn.git",
         "state": {
           "branch": "master",
-          "revision": "faf2c70541399085d55c0f974914b2ccfd6f8b50",
+          "revision": "c47945dd4fbb8d9ad985a9fe0c66e56b5168b00c",
           "version": null
         }
       },
@@ -150,8 +150,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/Kitura-net.git",
         "state": {
           "branch": null,
-          "revision": "8ac1efdfcc807345cdd77ccdd8816923ddf2778d",
-          "version": "2.4.1"
+          "revision": "e017a57772eb477c294d72b25ab9ae38d25539f5",
+          "version": "2.4.200"
         }
       },
       {
@@ -168,8 +168,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/Kitura-TemplateEngine.git",
         "state": {
           "branch": null,
-          "revision": "d62d74bca48c6fb76f9fc1f48eeb2d7af415e80b",
-          "version": "2.0.1"
+          "revision": "1670b09bfb63b66f7dffff627a06b50492485407",
+          "version": "2.0.200"
         }
       },
       {
@@ -192,11 +192,11 @@
       },
       {
         "package": "PersistentValue",
-        "repositoryURL": "https://github.com/crspybits/PersistentValue.git",
+        "repositoryURL": "http://github.com/crspybits/PersistentValue.git",
         "state": {
-          "branch": null,
-          "revision": "995657d86a2101abfc1bb72a2c631d8433707df0",
-          "version": "0.6.0"
+          "branch": "master",
+          "revision": "6889a330239ecf5caa8ffbc9e004f2ffd41efbe2",
+          "version": null
         }
       },
       {
@@ -228,11 +228,11 @@
       },
       {
         "package": "SideMenu",
-        "repositoryURL": "https://github.com/Vidhyadharan-Mohanram/SideMenu.git",
+        "repositoryURL": "https://github.com/SyncServerII/SideMenu.git",
         "state": {
-          "branch": null,
-          "revision": "d6d7834c6cab5ee85bca1e95933804af06ad9215",
-          "version": "0.1.0"
+          "branch": "master",
+          "revision": "c5f34a11a61ab82d23a12ec0f81c1b19ebbedd30",
+          "version": null
         }
       },
       {
@@ -286,7 +286,7 @@
         "state": {
           "branch": null,
           "revision": "a5978582981f7151594bdaf5fe0d3cd9b1d2d0c0",
-          "version": "1.3.4"
+          "version": "1.3.200"
         }
       },
       {
