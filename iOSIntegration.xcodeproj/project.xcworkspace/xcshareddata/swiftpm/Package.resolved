@@ -114,7 +114,7 @@
         "repositoryURL": "http://github.com/SyncServerII/iOSSIgnIn.git",
         "state": {
           "branch": "master",
-          "revision": "c47945dd4fbb8d9ad985a9fe0c66e56b5168b00c",
+          "revision": "7f76a13b5f65c29711679b3db754f3199bee10b0",
           "version": null
         }
       },
@@ -195,7 +195,7 @@
         "repositoryURL": "http://github.com/crspybits/PersistentValue.git",
         "state": {
           "branch": "master",
-          "revision": "6889a330239ecf5caa8ffbc9e004f2ffd41efbe2",
+          "revision": "67dfc448f848bf44d73b8271b6239863ebea1d93",
           "version": null
         }
       },

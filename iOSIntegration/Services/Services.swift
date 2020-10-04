@@ -13,6 +13,14 @@ class Services {
     // You must use the App Groups Entitlement and setup a applicationGroupIdentifier https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_security_application-groups
     let applicationGroupIdentifier = "group.biz.SpasticMuffin.SharedImages"
     
+    // See https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps
+    // Note this can't just be your bundle ID. See https://useyourloaf.com/blog/keychain-group-access/
+    // and https://stackoverflow.com/questions/11726672/access-app-identifier-prefix-programmatically
+    let keychainSharingGroup = "BH68R29JBE.biz.SpasticMuffin.SharedImages"
+    
+    // Going to use the literal bundle id, so it's the same across the app and the sharing extension.
+    let keychainService = "biz.SpasticMuffin.SharedImages"
+
     // In the documents directory
     let logFileName = "LogFile.txt"
 
@@ -41,7 +49,9 @@ class Services {
         }
         
         PersistentValueFile.alternativeDocumentsDirectory = documentsURL.path
-        
+        PersistentValueKeychain.keychainService = keychainService
+        PersistentValueKeychain.accessGroup = keychainSharingGroup
+
         guard let path = Bundle.main.path(forResource: Self.plistServerConfig.0, ofType: Self.plistServerConfig.1) else {
             setupFailure = true
             return
@@ -68,6 +78,7 @@ class Services {
             setupFailure = true
         }
         
+        // This is used to form the URL-type links used for sharing.
         guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
             logger.error("Could not get bundle identifier")
             setupFailure = true
@@ -88,11 +99,6 @@ class Services {
         for signIn in signInsToAdd {
             signInServices.manager.addSignIn(signIn, launchOptions: options)
         }
-    }
-    
-    public func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return signInServices.manager.application(UIApplication.shared, open: url) ||
-            signInServices.sharingInvitation.application(UIApplication.shared, open: url)
     }
 }
 

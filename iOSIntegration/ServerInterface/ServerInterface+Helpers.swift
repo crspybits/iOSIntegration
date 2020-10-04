@@ -1,65 +1,16 @@
+//
+//  ServerInterface+Helpers.swift
+//  iOSIntegration
+//
+//  Created by Christopher G Prince on 10/3/20.
+//
 
 import Foundation
-import iOSBasics
 import iOSShared
-import SQLite
-import iOSDropbox
-import iOSSignIn
-import PersistentValue
 import ServerShared
+import iOSBasics
 
-enum ServerInterfaceError: Error {
-    case cannotFindFile
-    case noDeviceUUID
-    case badUUID
-    case noSharingGroups
-    case cannotConvertStringToData
-    case noServerURL
-}
-
-class ServerInterface {
-    var firstSharingGroupUUID:UUID?
-    
-    let deviceUUIDString = try! PersistentValue<String>(name: "ServerInterface.deviceUUID", storage: .userDefaults)
-        
-    // This is within the app's Documents directory
-    let databaseFileName = "SQLite.db"
-    
-    let deviceUUID:UUID
-    
-    let hashingManager = HashingManager()
-    let syncServer:SyncServer
-
-    init(signIns: SignIns, serverURL: URL) throws {
-        if deviceUUIDString.value == nil {
-            deviceUUIDString.value = UUID().uuidString
-        }
-        
-        guard let uuidString = deviceUUIDString.value else {
-            throw ServerInterfaceError.noDeviceUUID
-        }
-        
-        guard let uuid = UUID(uuidString: uuidString) else {
-            throw ServerInterfaceError.badUUID
-        }
-        
-        deviceUUID = uuid
-
-        try hashingManager.add(hashing: DropboxHashing())
-
-        let dbURL = Files.getDocumentsDirectory().appendingPathComponent(databaseFileName)
-        logger.info("SQLite db: \(dbURL.path)")
-
-        let db = try Connection(dbURL.path)
-
-        let config = Configuration(appGroupIdentifier: nil, serverURL: serverURL, minimumServerVersion: nil, failoverMessageURL: nil, cloudFolderName: "BackgroundTesting", deviceUUID: deviceUUID, temporaryFiles: Configuration.defaultTemporaryFiles)
-
-        syncServer = try SyncServer(hashingManager: hashingManager, db: db, configuration: config, signIns: signIns)
-        logger.info("SyncServer initialized!")
-        
-        syncServer.delegate = self
-    }
-    
+extension ServerInterface {
     func sync(sharingGroupUUID: UUID? = nil) {
         do {
             try syncServer.sync(sharingGroupUUID: sharingGroupUUID)
@@ -156,60 +107,5 @@ class ServerInterface {
         } catch let error {
             logger.error("\(error)")
         }
-    }
-}
-
-extension ServerInterface: SyncServerDelegate {
-    func error(_ syncServer: SyncServer, error: ErrorEvent) {
-        logger.error("\(String(describing: error))")
-
-        switch error {
-        case .error:
-            break
-        case .showAlert(let title, let message):
-            Alert.show(withTitle: title, message:message)
-        }
-    }
-    
-    func syncCompleted(_ syncServer: SyncServer, result: SyncResult) {
-        logger.info("syncCompleted: \(result)")
-        
-        switch result {
-        case .index(sharingGroupUUID: _, index: let fileIndex):
-            for file in fileIndex {
-                logger.info("\(file)")
-            }
-
-        case .noIndex:
-            break
-        }
-    }
-
-    func uuidCollision(_ syncServer: SyncServer, type: UUIDCollisionType, from: UUID, to: UUID) {
-    }
-    
-    // The rest have informative detail; perhaps purely for testing.
-    
-    func uploadQueue(_ syncServer: SyncServer, event: UploadEvent) {
-        logger.info("uploadQueue: \(event)")
-    }
-    
-    func downloadQueue(_ syncServer: SyncServer, event: DownloadEvent) {
-        logger.info("downloadQueue: \(event)")
-    }
-
-    // Request to server for upload deletion completed successfully.
-    func deletionCompleted(_ syncServer: SyncServer) {
-        logger.info("deletionCompleted")
-    }
-
-    // Called when vN deferred upload(s), or deferred deletions, successfully completed, is/are detected.
-    func deferredCompleted(_ syncServer: SyncServer, operation: DeferredOperation, numberCompleted: Int) {
-        logger.info("deferredCompleted: \(operation); numberCompleted: \(numberCompleted)")
-    }
-    
-    // Another client deleted a file/file group.
-    func downloadDeletion(_ syncServer: SyncServer, details: DownloadDeletion) {
-        logger.info("downloadDeletion: \(details)")
     }
 }

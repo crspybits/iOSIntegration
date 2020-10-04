@@ -10,6 +10,7 @@ import ServerShared
 import iOSShared
 
 extension Services {
+    // Call this if the user pastes an invitation code into the UI and needs to redeem it.
     func copyPaste(invitationCodeUUID: UUID) {
         serverInterface.syncServer.getSharingInvitationInfo(sharingInvitationUUID: invitationCodeUUID) { [weak self] result in
             guard let self = self else { return }
