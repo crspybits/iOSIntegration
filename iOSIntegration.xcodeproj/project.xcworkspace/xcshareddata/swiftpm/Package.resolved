@@ -12,7 +12,7 @@
       },
       {
         "package": "Cryptor",
-        "repositoryURL": "https://github.com/IBM-Swift/BlueCryptor.git",
+        "repositoryURL": "https://github.com/Kitura/BlueCryptor.git",
         "state": {
           "branch": null,
           "revision": "ee5880e031da4c609f372cf7472476ab51d5dd19",
@@ -114,7 +114,7 @@
         "repositoryURL": "http://github.com/SyncServerII/iOSSIgnIn.git",
         "state": {
           "branch": "master",
-          "revision": "7f76a13b5f65c29711679b3db754f3199bee10b0",
+          "revision": "949a383ef4845d2650c8b87e50d7024a8069b516",
           "version": null
         }
       },
@@ -132,8 +132,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/Kitura.git",
         "state": {
           "branch": null,
-          "revision": "bbb7462ac3d422cad4480a57ddbd33263c381a7b",
-          "version": "2.9.1"
+          "revision": "daf6479097469a0c1fe64755db6e23f788a3ec29",
+          "version": "2.9.200"
         }
       },
       {
@@ -141,13 +141,13 @@
         "repositoryURL": "https://github.com/IBM-Swift/Kitura-Credentials.git",
         "state": {
           "branch": null,
-          "revision": "120d65f08e53500c4a87eb6773e7799701594691",
-          "version": "2.5.0"
+          "revision": "9edcb49d50ae57e0065b17e6209c82169aecb207",
+          "version": "2.5.200"
         }
       },
       {
         "package": "Kitura-net",
-        "repositoryURL": "https://github.com/IBM-Swift/Kitura-net.git",
+        "repositoryURL": "https://github.com/Kitura/Kitura-net.git",
         "state": {
           "branch": null,
           "revision": "e017a57772eb477c294d72b25ab9ae38d25539f5",
@@ -156,16 +156,16 @@
       },
       {
         "package": "Kitura-Session",
-        "repositoryURL": "https://github.com/IBM-Swift/Kitura-Session.git",
+        "repositoryURL": "https://github.com/Kitura/Kitura-Session.git",
         "state": {
           "branch": null,
-          "revision": "b7c3476e588c8902f067ea89b87db65f242401b4",
-          "version": "3.3.4"
+          "revision": "774509e7fb48a01400c177c771faa5f8ff7842e4",
+          "version": "3.3.200"
         }
       },
       {
         "package": "Kitura-TemplateEngine",
-        "repositoryURL": "https://github.com/IBM-Swift/Kitura-TemplateEngine.git",
+        "repositoryURL": "https://github.com/Kitura/Kitura-TemplateEngine.git",
         "state": {
           "branch": null,
           "revision": "1670b09bfb63b66f7dffff627a06b50492485407",
@@ -174,7 +174,7 @@
       },
       {
         "package": "KituraContracts",
-        "repositoryURL": "https://github.com/IBM-Swift/KituraContracts.git",
+        "repositoryURL": "https://github.com/Kitura/KituraContracts.git",
         "state": {
           "branch": null,
           "revision": "8418006e39e2efae9b31ae92721cb597ac29c617",
@@ -183,7 +183,7 @@
       },
       {
         "package": "LoggerAPI",
-        "repositoryURL": "https://github.com/IBM-Swift/LoggerAPI.git",
+        "repositoryURL": "https://github.com/Kitura/LoggerAPI.git",
         "state": {
           "branch": null,
           "revision": "e82d34eab3f0b05391082b11ea07d3b70d2f65bb",
@@ -282,7 +282,7 @@
       },
       {
         "package": "TypeDecoder",
-        "repositoryURL": "https://github.com/IBM-Swift/TypeDecoder.git",
+        "repositoryURL": "https://github.com/Kitura/TypeDecoder.git",
         "state": {
           "branch": null,
           "revision": "a5978582981f7151594bdaf5fe0d3cd9b1d2d0c0",

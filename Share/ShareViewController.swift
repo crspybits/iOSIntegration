@@ -6,10 +6,12 @@
 //
 
 import UIKit
-import Social
+//import Social
 import MobileCoreServices
 import iOSShared
 import iOSBasics
+import SwiftUI
+import iOSSignIn
 
 // https://medium.com/macoclock/ios-share-extension-swift-5-1-1606263746b
 // https://stackoverflow.com/questions/40769387/getting-an-ios-share-action-extension-to-show-up-only-for-a-single-image
@@ -20,37 +22,89 @@ import iOSBasics
 // To make a custom UI: https://stackoverflow.com/questions/25922118 (The original superclass for ShareViewController was `SLComposeServiceViewController`).
 
 class ShareViewController: UIViewController {
-    var imageData: NSData?
-    @IBOutlet weak var sharingContainer: UIView!
-    @IBOutlet weak var postButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var sharingItems: UICollectionView!
+    let viewModel = ViewModel()
     var serverInterface:ServerInterface!
-    var groups = [iOSBasics.SharingGroup]()
-
+    var hostingController:UIHostingController<SharingView>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.dataSource = self
-        serverInterface = Services.session.serverInterface
-        
-        sharingContainer.layer.cornerRadius = 10
-        sharingContainer.layer.masksToBounds = true
-        
-        Services.session.appLaunch(options: nil)
-        let failure = Services.session.setupFailure
-        logger.info("Services.session.setupFailure: \(failure)")
-        
-        #warning("Handle this error; show an alert and quit if we get it.")
-        guard !failure else {
+        logger.info("viewDidLoad: ShareViewController")
+
+        guard setupServices() else {
             return
         }
         
+        viewModel.userSignedIn = Services.session.signInServices.manager.userIsSignedIn
+
+        setupView()
+    }
+    
+    func setupView() {
+        setViewModelSize(size: view.frame.size)
+        hostingController = UIHostingController(rootView: SharingView(viewModel: viewModel))
+        addChild(hostingController)
+        
+        // Having problems not getting clipping when I do this from SwiftUI, so doing it here. See also https://stackoverflow.com/questions/57269651
+        hostingController.view.layer.cornerRadius = 10
+        hostingController.view.layer.masksToBounds = true
+        hostingController.view.layer.borderWidth = 1
+        
+        let color: UIColor
+        if traitCollection.userInterfaceStyle == .light {
+            color = UIColor(white: 0.3, alpha: 1)
+        } else {
+            color = UIColor(white: 0.7, alpha: 1)
+        }
+        
+        hostingController.view.layer.borderColor = color.cgColor
+        
+        view.addSubview(hostingController.view)
+        addConstaints()
+    }
+    
+    func setViewModelSize(size: CGSize) {
+        let widthProportion: CGFloat = 0.8
+        let heightProportion: CGFloat = 0.7
+        viewModel.width = size.width * widthProportion
+        viewModel.height = size.height * heightProportion
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        setViewModelSize(size: size)
+    }
+    
+    func addConstaints() {
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.view.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        hostingController.view.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    func setupServices() -> Bool {
+        // If the sharing extension is used twice in a row, we oddly have a state where it's already been initialized. Get a crash on multiple initialization, so be careful.
+        if Services.setupState == .none {
+            Services.setup()
+        }
+        
+        if Services.setupState == .done(appLaunch: false) {
+            Services.session.appLaunch(options: nil)
+        }
+        
+        logger.info("Services.session.setupState: \(Services.setupState)")
+        
+        guard Services.setupState.isComplete else {
+            logger.error("Services.session.setupState: \(Services.setupState)")
+            #warning("Handle this error; show an alert and quit the sharing extension if we get it.")
+            return false
+        }
+        
+        serverInterface = Services.session.serverInterface
+
         serverInterface.syncCompleted = { [weak self] in
             guard let self = self else { return }
             if let sharingGroups = try? self.serverInterface.syncServer.sharingGroups() {
-                self.groups = sharingGroups
-                self.tableView.reloadSections([0], with: .automatic)
+                self.viewModel.sharingGroups = sharingGroups.enumerated().map { index, group in
+                    return SharingGroupData(id: group.sharingGroupUUID, name: group.sharingGroupName ?? "Album \(index)")
+                }
             }
             self.serverInterface.syncCompleted = nil
         }
@@ -62,9 +116,9 @@ class ShareViewController: UIViewController {
             logger.error("\(error)")
         }
         
-        //self.handleSharedFile()
+        return true
     }
-    
+
     func handleSharedFile() {
         // extracting the path to the URL that is being shared
         let attachments = (self.extensionContext?.inputItems.first as? NSExtensionItem)?.attachments ?? []
@@ -117,25 +171,12 @@ class ShareViewController: UIViewController {
     }
     
     // MARK: Button actions
-    
+    /*
     @IBAction func cancelAction(_ sender: Any) {
         // See also https://stackoverflow.com/questions/43670938
         extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
     }
     
     @IBAction func postAction(_ sender: Any) {
-    }
-}
-
-extension ShareViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groups.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = groups[indexPath.row].sharingGroupName ?? "Sharing group \(indexPath.row)"
-        cell.backgroundColor = .clear
-        return cell
-    }
+    }*/
 }

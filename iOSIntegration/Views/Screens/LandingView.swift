@@ -8,7 +8,7 @@ struct LandingView: View {
     var body: some View {
         MenuNavBar(title: "Sign In") {
             VStack {
-                if Services.session.setupFailure {
+                if !Services.setupState.isComplete {
                     Text("Setup Failure!")
                         .background(Color.red)
                 }

@@ -32,11 +32,7 @@ struct FileAccessView: View {
     
     var body: some View {
         VStack {
-            if Services.session.setupFailure {
-                Text("Setup Failure!")
-                    .background(Color.red)
-            }
-            else {
+            if Services.setupState.isComplete {
                 InitialViews()
                 
                 Button(action: {
@@ -64,6 +60,10 @@ struct FileAccessView: View {
                 
                 UploadFileView(sharingGroupUUID: sharingGroupUUID, fileGroupUUID: fileGroupUUID, newFileText: newFileText)
                 LargeUploads(sharingGroupUUID: sharingGroupUUID, failImmediatelyAfterStarting: true)
+            }
+            else {
+                Text("Setup Failure!")
+                    .background(Color.red)
             }
         }
     }

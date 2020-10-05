@@ -24,19 +24,49 @@ class Services {
     // In the documents directory
     let logFileName = "LogFile.txt"
 
-    static let session = Services()
+    static private var _session:Services!
+    
+    // I'm being very careful here because of a problem that's coming up in the sharing extension. If the sharing extension is used twice in a row, we oddly have a state where it's already been initialized. Get a crash on multiple initialization.
+    static var session:Services {
+        set {
+            guard _session == nil else {
+                fatalError("You have already called Self.setup!")
+            }
+            _session = newValue
+        }
+        get {
+            guard let session = _session else {
+                fatalError("You have not yet called Self.setup!")
+            }
+            return session
+        }
+    }
+    
+    var configuration:UIConfiguration!
     var signInServices: SignInServices!
     var serverInterface:ServerInterface!
-    var setupFailure = false
+    
     var signInsToAdd = [GenericSignIn]()
     private static let plistServerConfig = ("Server", "plist")
+
+    enum SetupState: Equatable {
+        case none
+        case done(appLaunch: Bool)
+        case failure
+        
+        var isComplete: Bool {
+            return self == .done(appLaunch: true)
+        }
+    }
+    
+    static var setupState: SetupState = .none
 
     private init() {
         do {
             try SharedContainer.appLaunchSetup(applicationGroupIdentifier: applicationGroupIdentifier)
         } catch let error {
             logger.error("\(error)")
-            setupFailure = true
+            Self.setupState = .failure
             return
         }
         
@@ -44,7 +74,7 @@ class Services {
                 
         guard let documentsURL = SharedContainer.session?.documentsURL else {
             logger.error("Could not get documentsURL")
-            setupFailure = true
+            Self.setupState = .failure
             return
         }
         
@@ -53,19 +83,19 @@ class Services {
         PersistentValueKeychain.accessGroup = keychainSharingGroup
 
         guard let path = Bundle.main.path(forResource: Self.plistServerConfig.0, ofType: Self.plistServerConfig.1) else {
-            setupFailure = true
+            Self.setupState = .failure
             return
         }
         
         guard let configPlist = NSDictionary(contentsOfFile: path) as? Dictionary<String, Any> else {
-            setupFailure = true
+            Self.setupState = .failure
             return
         }
         
         guard let urlString = configPlist["serverURL"] as? String,
             let serverURL = URL(string: urlString) else {
             logger.error("Cannot get server URL")
-            setupFailure = true
+            Self.setupState = .failure
             return
         }
         
@@ -75,13 +105,13 @@ class Services {
             serverInterface = try ServerInterface(signIns: signIns, serverURL: serverURL)
         } catch let error {
             logger.error("Could not start ServerInterface: \(error)")
-            setupFailure = true
+            Self.setupState = .failure
         }
         
         // This is used to form the URL-type links used for sharing.
         guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
             logger.error("Could not get bundle identifier")
-            setupFailure = true
+            Self.setupState = .failure
             return
         }
         
@@ -93,12 +123,19 @@ class Services {
         setupSignInServices(configPlist: configPlist, signIns: signIns, bundleIdentifier: bundleIdentifier, helper: self)
         
         logger.info("Services: init successful!")
+        Self.setupState = .done(appLaunch: false)
+    }
+    
+    // This *must* be called prior to any uses of `session`.
+    static func setup() {
+        session = Services()
     }
     
     func appLaunch(options: [UIApplication.LaunchOptionsKey: Any]?) {
         for signIn in signInsToAdd {
             signInServices.manager.addSignIn(signIn, launchOptions: options)
         }
+        Self.setupState = .done(appLaunch: true)
     }
 }
 

@@ -47,7 +47,7 @@ extension Services {
             signInsToAdd += [facebookSignIn]
         }
         
-        let configuration = UIConfiguration(
+        configuration = UIConfiguration(
             signIntoExisting: "Sign into Existing\nNeebla Account",
             signingIntoExisting: "Signing into Existing\nNeebla Account",
             signedIntoExisting: "Signed into Existing\nNeebla Account",

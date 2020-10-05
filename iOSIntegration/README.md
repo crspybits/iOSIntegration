@@ -14,6 +14,10 @@ This needs to be enabled in both the app and the share extension.
 
 # Test procedures
 
+## Try the sharing extension more than once
+
+Without closing out the sharing part of the app you are using. (I got a crash on this once while testing with Photos app because of multiple initialization).
+
 ## Test file upload in sharing extension
 
 ## Sharing invitation

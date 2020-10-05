@@ -11,8 +11,9 @@ import iOSShared
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        Services.setup()
         Services.session.appLaunch(options: launchOptions)
-        return !Services.session.setupFailure
+        return Services.setupState.isComplete
     }
     
     // While some of the AppDelegate methods don't seem to work when using SwiftUI and the SceneDelegate (e.g., see https://github.com/dropbox/SwiftyDropbox/issues/259), this method *does* work.
