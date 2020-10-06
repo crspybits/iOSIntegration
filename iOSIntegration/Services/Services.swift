@@ -13,6 +13,8 @@ class Services {
     // You must use the App Groups Entitlement and setup a applicationGroupIdentifier https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_security_application-groups
     let applicationGroupIdentifier = "group.biz.SpasticMuffin.SharedImages"
     
+    let urlSessionBackgroundIdentifier = "biz.SpasticMuffin.SyncServer.Shared"
+    
     // See https://developer.apple.com/documentation/security/keychain_services/keychain_items/sharing_access_to_keychain_items_among_a_collection_of_apps
     // Note this can't just be your bundle ID. See https://useyourloaf.com/blog/keychain-group-access/
     // and https://stackoverflow.com/questions/11726672/access-app-identifier-prefix-programmatically
@@ -102,7 +104,7 @@ class Services {
         let signIns = SignIns(signInServicesHelper: self)
         
         do {
-            serverInterface = try ServerInterface(signIns: signIns, serverURL: serverURL)
+            serverInterface = try ServerInterface(signIns: signIns, serverURL: serverURL, appGroupIdentifier: applicationGroupIdentifier, urlSessionBackgroundIdentifier: urlSessionBackgroundIdentifier)
         } catch let error {
             logger.error("Could not start ServerInterface: \(error)")
             Self.setupState = .failure

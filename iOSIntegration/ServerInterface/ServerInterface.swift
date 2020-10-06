@@ -33,7 +33,7 @@ class ServerInterface {
     
     var syncCompleted:(()->())?
 
-    init(signIns: SignIns, serverURL: URL) throws {
+    init(signIns: SignIns, serverURL: URL, appGroupIdentifier: String, urlSessionBackgroundIdentifier: String) throws {
         if deviceUUIDString.value == nil {
             let uuid = UUID().uuidString
             deviceUUIDString.value = uuid
@@ -60,7 +60,7 @@ class ServerInterface {
 
         let db = try Connection(dbURL.path)
 
-        let config = Configuration(appGroupIdentifier: nil, serverURL: serverURL, minimumServerVersion: nil, failoverMessageURL: nil, cloudFolderName: "BackgroundTesting", deviceUUID: deviceUUID, temporaryFiles: Configuration.defaultTemporaryFiles)
+        let config = Configuration(appGroupIdentifier: appGroupIdentifier, urlSessionBackgroundIdentifier: urlSessionBackgroundIdentifier, serverURL: serverURL, minimumServerVersion: nil, failoverMessageURL: nil, cloudFolderName: "BackgroundTesting", deviceUUID: deviceUUID, temporaryFiles: Configuration.defaultTemporaryFiles)
 
         syncServer = try SyncServer(hashingManager: hashingManager, db: db, configuration: config, signIns: signIns)
         logger.info("SyncServer initialized!")

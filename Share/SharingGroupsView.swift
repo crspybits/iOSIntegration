@@ -12,7 +12,6 @@ import iOSSignIn
 
 struct SharingGroupsView: View {
     @ObservedObject var viewModel:ViewModel
-    @State private var selectedGroup: SharingGroupData?
     @Environment(\.colorScheme) var colorScheme
 
     var selectedColor: Color {
@@ -30,11 +29,12 @@ struct SharingGroupsView: View {
             Section(header: Text("Album")) {
                 ForEach(viewModel.sharingGroups, id: \.self) { group in
                     Button(action: {
-                        self.selectedGroup = group
+                        self.viewModel.selectedSharingGroupUUID = group.id
                     }, label: {
                         Text(group.name)
                     })
-                    .listRowBackground(self.selectedGroup == group ?
+                    .listRowBackground(
+                        self.viewModel.selectedSharingGroupUUID == group.id ?
                         selectedColor :
                         Color(UIColor.systemGroupedBackground))
                 }

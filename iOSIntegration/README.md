@@ -55,6 +55,7 @@ All access now to files should be through the shared container.
 
 Getting this warning:
 warning: Embedded binary's NSExtensionActivationRule is TRUEPREDICATE. Before you submit your containing app to the App Store, be sure to replace all uses of TRUEPREDICATE with specific predicate statements or NSExtensionActivationRule keys. If any extensions in your containing app include TRUEPREDICATE, the app will be rejected.
+See: https://stackoverflow.com/questions/32892383/how-to-handle-nsextensionactivationrule-is-truepredicate/33431802
 
 ### As I think Rod mentioned, will need a means for the user to select the album that they want to use to upload a file.
 

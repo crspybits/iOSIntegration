@@ -78,7 +78,7 @@
         "repositoryURL": "http://github.com/SyncServerII/iOSBasics.git",
         "state": {
           "branch": "master",
-          "revision": "a6203fbaf60bdde27cb8679969836c6a4b8c3df4",
+          "revision": "2d80e5099b36d6bffdf5d42266cd17f580ad9222",
           "version": null
         }
       },
@@ -105,7 +105,7 @@
         "repositoryURL": "https://github.com/SyncServerII/iOSShared.git",
         "state": {
           "branch": "master",
-          "revision": "d2a0ad28f27d8bdd4c3caaf5a24f6429b6f0e722",
+          "revision": "c0c25db1355ed1aa565b4b8dc323c841198eda03",
           "version": null
         }
       },
@@ -258,7 +258,7 @@
         "repositoryURL": "http://github.com/crspybits/swift-log-file.git",
         "state": {
           "branch": "main",
-          "revision": "0c4cdbeacf8467cbaf9f8c4d35ecf4bba31fc9a2",
+          "revision": "9de6703d7809a9d747310fad3b271045e5240e59",
           "version": null
         }
       },

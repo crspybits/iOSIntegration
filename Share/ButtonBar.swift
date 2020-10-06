@@ -15,12 +15,16 @@ struct ButtonBar: View {
     var body: some View {
         HStack {
             Button("Cancel", action: {
-            
+                viewModel.cancel?()
             })
             Spacer()
             Button("Post", action: {
-            
+                if let preview = viewModel.preview,
+                    let sharingGroupUUID = viewModel.selectedSharingGroupUUID {
+                    viewModel.post?(preview, sharingGroupUUID)
+                }
             })
+            .disabled(viewModel.preview == nil || viewModel.selectedSharingGroupUUID == nil)
         }
         .frame(height: 50)
     }

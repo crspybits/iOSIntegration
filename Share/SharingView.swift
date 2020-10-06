@@ -20,8 +20,8 @@ struct SharingView: View {
                 Spacer()
                 Container(viewModel: viewModel)
                 Spacer()
-                ItemPreview()
-                    .frame(height: 75)
+                ItemPreview(viewModel: viewModel)
+                    .frame(width: 75, height: 75)
                 Spacer()
             }
             .frame(
@@ -43,7 +43,7 @@ struct Container: View {
             }
             else {
                 Text("You are not signed in. Please sign in using the Neebla app.")
-                    .foregroundColor(Color.black)
+                    .foregroundColor(Color(UIColor.label))
             }
         }
     }
