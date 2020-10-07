@@ -21,7 +21,7 @@ struct SharingView: View {
                 Container(viewModel: viewModel)
                 Spacer()
                 ItemPreview(viewModel: viewModel)
-                    .frame(width: 75, height: 75)
+                    .frame(width: 100, height: 100)
                 Spacer()
             }
             .frame(

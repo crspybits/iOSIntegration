@@ -20,17 +20,13 @@ struct SharingGroupData: Identifiable, Equatable, Hashable {
     }
 }
 
-enum Preview {
-    case image(UIImage, URL)
-}
-
 class ViewModel: ObservableObject {
     @Published var width: CGFloat = 0
     @Published var height: CGFloat = 0
     @Published var sharingGroups = [SharingGroupData]()
     @Published var userSignedIn: Bool = true
-    @Published var preview: Preview?
     @Published var selectedSharingGroupUUID: UUID?
+    @Published var sharingItem: ItemProvider?
     var cancel:(()->())?
-    var post:((Preview, _ sharingGroupUUID: UUID)->())!
+    var post:((URL, _ sharingGroupUUID: UUID)->())!
 }

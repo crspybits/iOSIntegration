@@ -46,13 +46,24 @@ class ShareViewController: UIViewController {
             self?.cancel()
         }
         
-        viewModel.post = { [weak self] preview, sharingGroupUUID in
-            self?.uploadFile(preview: preview, sharingGroupUUID: sharingGroupUUID)
+        viewModel.post = { [weak self] url, sharingGroupUUID in
+            self?.uploadFile(url: url, sharingGroupUUID: sharingGroupUUID)
         }
         
         setupView()
         
-        getSharedFile()
+        getSharedFile { [weak self] result in
+            switch result {
+            case .success(let itemProvider):
+                DispatchQueue.main.async {
+                    self?.viewModel.sharingItem = itemProvider
+                }
+
+            case .failure(let error):
+                self?.showAlert = ShowAlert(title: "Alert!", message: "Could not load item!")
+                logger.error("\(error)")
+            }
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -68,24 +79,7 @@ class ShareViewController: UIViewController {
             }
         }
     }
-    
-    func didSelectPost() {
-        // This is called after the user selects Post. Do the upload of contentText and/or NSExtensionContext attachments.
-    
-        // Inform the host that we're done, so it un-blocks its UI. Note: Alternatively you could call super's -didSelectPost, which will similarly complete the extension context.
-    }
-    
-    // MARK: Button actions
-    /*
-    @IBAction func cancelAction(_ sender: Any) {
-        // See also https://stackoverflow.com/questions/43670938
-        extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
-    }
-    
-    @IBAction func postAction(_ sender: Any) {
-    }*/
 }
-
 
 extension ShareViewController {
     func cancel() {
@@ -180,93 +174,33 @@ extension ShareViewController {
         return true
     }
 
-    func getSharedFile() {
-        getSharedFile { [weak self] result in
-            switch result {
-            case .success(let sharedFile):
-                var image: UIImage?
-                var imageURL: URL?
-                
-                switch sharedFile {
-                case .image(let url):
-                    imageURL = url
-                    do {
-                        let data = try Data(contentsOf: url)
-                        image = UIImage(data: data)
-                    } catch let error {
-                        logger.error("\(error)")
-                    }
-                }
-                
-                if let image = image, let url = imageURL {
-                    DispatchQueue.main.async {
-                        self?.viewModel.preview = .image(image, url)
-                    }
-                }
-                else {
-                    self?.showAlert = ShowAlert(title: "Alert!", message: "Could not load image!")
-                }
-            case .failure(let error):
-                self?.showAlert = ShowAlert(title: "Alert!", message: "Could not load image!")
-                logger.error("\(error)")
-            }
-        }
-    }
-    
-    enum SharedFile {
-        case image(URL)
-    }
-
     enum HandleSharedFileError: Error {
         case notJustOneFile
-        case wrongFileType
-        case noURL
     }
 
-    func getSharedFile(completion: @escaping (Result<SharedFile, Error>)->()) {
+    func getSharedFile(completion: @escaping (Result<ItemProvider, Error>)->()) {
         let attachments = (self.extensionContext?.inputItems.first as? NSExtensionItem)?.attachments ?? []
-        let jpegType = "public.jpeg"
         
         guard attachments.count == 1 else {
             completion(.failure(HandleSharedFileError.notJustOneFile))
             return
         }
           
-        let attachment = attachments[0]
-
-        guard attachment.hasItemConformingToTypeIdentifier(jpegType) else {
-            completion(.failure(HandleSharedFileError.wrongFileType))
-            return
-        }
-
-        let dataContentType = kUTTypeData as String
-        attachment.loadItem(forTypeIdentifier: dataContentType, options: nil) { data, error in
-            if let error = error {
-                completion(.failure(error))
-                return
+        do {
+            try ItemProviderFactory.create(using: attachments[0]) { result in
+                completion(result)
             }
-            
-            if let url = data as? URL {
-                completion(.success(.image(url)))
-                return
-            }
-            
-            completion(.failure(HandleSharedFileError.noURL))
+        } catch let error {
+            completion(.failure(error))
         }
     }
     
-    func uploadFile(preview: Preview, sharingGroupUUID: UUID) {
+    func uploadFile(url: URL, sharingGroupUUID: UUID) {
         let fileUUID = UUID()
         let fileGroupUUID = UUID()
         
         let declaration1 = FileDeclaration(uuid: fileUUID, mimeType: MimeType.jpeg, appMetaData: nil, changeResolverName: nil)
         let declarations = Set<FileDeclaration>([declaration1])
-
-        guard case .image(_, let url) = preview else {
-            Alert.show(withTitle: "Alert!", message: "Could not get image!", style: .alert)
-            cancel()
-            return
-        }
         
         let uploadable1 = FileUpload(uuid: fileUUID, dataSource: .copy(url))
         let uploadables = Set<FileUpload>([uploadable1])

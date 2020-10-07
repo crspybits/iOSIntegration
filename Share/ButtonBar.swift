@@ -19,12 +19,12 @@ struct ButtonBar: View {
             })
             Spacer()
             Button("Post", action: {
-                if let preview = viewModel.preview,
+                if let preview = viewModel.sharingItem,
                     let sharingGroupUUID = viewModel.selectedSharingGroupUUID {
-                    viewModel.post?(preview, sharingGroupUUID)
+                    viewModel.post?(preview.itemURL, sharingGroupUUID)
                 }
             })
-            .disabled(viewModel.preview == nil || viewModel.selectedSharingGroupUUID == nil)
+            .disabled(viewModel.sharingItem == nil || viewModel.selectedSharingGroupUUID == nil)
         }
         .frame(height: 50)
     }
