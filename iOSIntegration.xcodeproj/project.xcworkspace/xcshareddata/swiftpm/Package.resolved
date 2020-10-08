@@ -78,7 +78,7 @@
         "repositoryURL": "http://github.com/SyncServerII/iOSBasics.git",
         "state": {
           "branch": "master",
-          "revision": "2d80e5099b36d6bffdf5d42266cd17f580ad9222",
+          "revision": "2905f9413131967efe674dcb93dc93843fb738b5",
           "version": null
         }
       },
@@ -183,7 +183,7 @@
       },
       {
         "package": "LoggerAPI",
-        "repositoryURL": "https://github.com/Kitura/LoggerAPI.git",
+        "repositoryURL": "https://github.com/IBM-Swift/LoggerAPI.git",
         "state": {
           "branch": null,
           "revision": "e82d34eab3f0b05391082b11ea07d3b70d2f65bb",
@@ -258,7 +258,7 @@
         "repositoryURL": "http://github.com/crspybits/swift-log-file.git",
         "state": {
           "branch": "main",
-          "revision": "9de6703d7809a9d747310fad3b271045e5240e59",
+          "revision": "d4b4a4f85b16e12b43c862cf2f83b0bcc9505fca",
           "version": null
         }
       },

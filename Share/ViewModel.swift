@@ -28,5 +28,5 @@ class ViewModel: ObservableObject {
     @Published var selectedSharingGroupUUID: UUID?
     @Published var sharingItem: ItemProvider?
     var cancel:(()->())?
-    var post:((URL, _ sharingGroupUUID: UUID)->())!
+    var post:((ItemProvider, _ sharingGroupUUID: UUID)->())!
 }

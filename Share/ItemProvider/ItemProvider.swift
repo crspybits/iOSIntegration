@@ -1,12 +1,15 @@
 
 import Foundation
 import SwiftUI
+import ServerShared
 
 protocol ItemProvider {
     // Must have at least one type identifier from NSItemProvider. E.g. "public.jpeg"
     static var typeIdentifiers: [String] { get }
     
     init(url: URL) throws
+    
+    var mimeType: MimeType { get }
     
     var preview: AnyView { get }
     var itemURL: URL { get }

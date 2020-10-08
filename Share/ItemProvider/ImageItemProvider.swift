@@ -1,7 +1,10 @@
 
 import SwiftUI
+import ServerShared
 
-struct ImageItemProvider: ItemProvider {    
+struct ImageItemProvider: ItemProvider {
+    let mimeType: MimeType = .jpeg
+    
     static let typeIdentifiers = ["public.jpeg"]
     
     var shouldUploadCopy = true

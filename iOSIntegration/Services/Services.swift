@@ -117,7 +117,13 @@ class Services {
             return
         }
         
-        setupLogging()
+        do {
+            try setupLogging()
+        } catch let error {
+            logger.error("Could not setup logging: \(error)")
+            Self.setupState = .failure
+            return
+        }
         
         // Do this *after* `setupLogging`-- the initial logger created by `iOSShared` doesn't have the file logging setup.
         set(logLevel: .trace)

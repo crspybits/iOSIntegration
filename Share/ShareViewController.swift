@@ -46,8 +46,8 @@ class ShareViewController: UIViewController {
             self?.cancel()
         }
         
-        viewModel.post = { [weak self] url, sharingGroupUUID in
-            self?.uploadFile(url: url, sharingGroupUUID: sharingGroupUUID)
+        viewModel.post = { [weak self] itemProvider, sharingGroupUUID in
+            self?.uploadFile(itemProvider: itemProvider, sharingGroupUUID: sharingGroupUUID)
         }
         
         setupView()
@@ -195,14 +195,14 @@ extension ShareViewController {
         }
     }
     
-    func uploadFile(url: URL, sharingGroupUUID: UUID) {
+    func uploadFile(itemProvider: ItemProvider, sharingGroupUUID: UUID) {
         let fileUUID = UUID()
         let fileGroupUUID = UUID()
         
-        let declaration1 = FileDeclaration(uuid: fileUUID, mimeType: MimeType.jpeg, appMetaData: nil, changeResolverName: nil)
+        let declaration1 = FileDeclaration(uuid: fileUUID, mimeType: itemProvider.mimeType, appMetaData: nil, changeResolverName: nil)
         let declarations = Set<FileDeclaration>([declaration1])
         
-        let uploadable1 = FileUpload(uuid: fileUUID, dataSource: .copy(url))
+        let uploadable1 = FileUpload(uuid: fileUUID, dataSource: .copy(itemProvider.itemURL))
         let uploadables = Set<FileUpload>([uploadable1])
 
         let testObject = ObjectDeclaration(fileGroupUUID: fileGroupUUID, objectType: "Image", sharingGroupUUID: sharingGroupUUID, declaredFiles: declarations)

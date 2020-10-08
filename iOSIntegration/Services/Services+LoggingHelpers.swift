@@ -17,21 +17,15 @@ extension Services {
     
     // Subsequent uses of the `logger` will log both to a file and the Xcode console.
     // Only call this once, during app launch.
-    func setupLogging() {
+    func setupLogging() throws {
         let loggingURL = logFileURL()
+        let fileLogger = try FileLogging(to: loggingURL)
 
         LoggingSystem.bootstrap { label in
-            var handlers = [LogHandler]()
-            
-            if let logFileHandler = try? FileLogHandler(label: label, localFile: loggingURL) {
-                handlers += [logFileHandler]
-                logger.info("Also logging to file: \(loggingURL)")
-            }
-            else {
-                logger.error("Could not open: \(loggingURL)")
-            }
-            
-            handlers += [StreamLogHandler.standardOutput(label: label)]
+            let handlers:[LogHandler] = [
+                FileLogHandler(label: label, fileLogger: fileLogger),
+                StreamLogHandler.standardOutput(label: label)
+            ]
 
             return MultiplexLogHandler(handlers)
         }
