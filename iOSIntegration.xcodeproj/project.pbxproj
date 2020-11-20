@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		830E607E254E3ADF005C1708 /* ServerShared in Frameworks */ = {isa = PBXBuildFile; productRef = 830E607D254E3ADF005C1708 /* ServerShared */; };
 		8312BF9B2526E5A2001C5FCF /* Services+Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8312BF9A2526E5A2001C5FCF /* Services+Invitation.swift */; };
 		8312BFA12528DF4C001C5FCF /* FileLogging in Frameworks */ = {isa = PBXBuildFile; productRef = 8312BFA02528DF4C001C5FCF /* FileLogging */; };
 		8312BFA62528E019001C5FCF /* Services+LoggingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8312BFA52528E019001C5FCF /* Services+LoggingHelpers.swift */; };
@@ -103,6 +104,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		830E6072254E399A005C1708 /* iOSBasics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = iOSBasics; path = ../../iOSBasics; sourceTree = "<group>"; };
 		8312BF9A2526E5A2001C5FCF /* Services+Invitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services+Invitation.swift"; sourceTree = "<group>"; };
 		8312BFA52528E019001C5FCF /* Services+LoggingHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services+LoggingHelpers.swift"; sourceTree = "<group>"; };
 		8312BFAA2528E855001C5FCF /* LoggerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerView.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 		8355454025241E0D00A30A63 /* MenuNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNavBar.swift; sourceTree = "<group>"; };
 		8355455325242FF900A30A63 /* Screens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens.swift; sourceTree = "<group>"; };
 		8355459D252440E800A30A63 /* SendInvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendInvitationView.swift; sourceTree = "<group>"; };
+		8378F347254E3C25004D2D3A /* ServerShared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ServerShared; path = ../../ServerShared; sourceTree = "<group>"; };
 		839B8236251EF19300C72901 /* ServerInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerInterface.swift; sourceTree = "<group>"; };
 		83C994F42529560900878980 /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C994F62529560900878980 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				830E607E254E3ADF005C1708 /* ServerShared in Frameworks */,
 				8355452A2524135E00A30A63 /* SFSafeSymbols in Frameworks */,
 				83415C31251DB94A00CBBE81 /* iOSFacebook in Frameworks */,
 				83415C2B251DB91700CBBE81 /* iOSDropbox in Frameworks */,
@@ -197,9 +201,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		830E6071254E3973005C1708 /* Local Packages */ = {
+			isa = PBXGroup;
+			children = (
+				8378F347254E3C25004D2D3A /* ServerShared */,
+				830E6072254E399A005C1708 /* iOSBasics */,
+			);
+			path = "Local Packages";
+			sourceTree = "<group>";
+		};
 		834C5E59251DB50900C2E8CE = {
 			isa = PBXGroup;
 			children = (
+				830E6071254E3973005C1708 /* Local Packages */,
 				834C5E64251DB50900C2E8CE /* iOSIntegration */,
 				834C5E7B251DB50C00C2E8CE /* iOSIntegrationTests */,
 				834C5E86251DB50C00C2E8CE /* iOSIntegrationUITests */,
@@ -390,6 +404,7 @@
 				8312BFA02528DF4C001C5FCF /* FileLogging */,
 				831A7A7225290DAF0087BD4F /* SideMenu */,
 				831A7B2425294FCC0087BD4F /* PersistentValue */,
+				830E607D254E3ADF005C1708 /* ServerShared */,
 			);
 			productName = iOSIntegration;
 			productReference = 834C5E62251DB50900C2E8CE /* iOSIntegration.app */;
@@ -497,6 +512,7 @@
 				8312BF9F2528DF4C001C5FCF /* XCRemoteSwiftPackageReference "swift-log-file" */,
 				831A7A7125290DAF0087BD4F /* XCRemoteSwiftPackageReference "SideMenu" */,
 				831A7B2325294FCC0087BD4F /* XCRemoteSwiftPackageReference "PersistentValue" */,
+				830E607C254E3ADF005C1708 /* XCRemoteSwiftPackageReference "ServerShared" */,
 			);
 			productRefGroup = 834C5E63251DB50900C2E8CE /* Products */;
 			projectDirPath = "";
@@ -989,6 +1005,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		830E607C254E3ADF005C1708 /* XCRemoteSwiftPackageReference "ServerShared" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "http://github.com/SyncServerII/ServerShared.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		8312BF9F2528DF4C001C5FCF /* XCRemoteSwiftPackageReference "swift-log-file" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "http://github.com/crspybits/swift-log-file.git";
@@ -1056,6 +1080,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		830E607D254E3ADF005C1708 /* ServerShared */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 830E607C254E3ADF005C1708 /* XCRemoteSwiftPackageReference "ServerShared" */;
+			productName = ServerShared;
+		};
 		8312BFA02528DF4C001C5FCF /* FileLogging */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8312BF9F2528DF4C001C5FCF /* XCRemoteSwiftPackageReference "swift-log-file" */;

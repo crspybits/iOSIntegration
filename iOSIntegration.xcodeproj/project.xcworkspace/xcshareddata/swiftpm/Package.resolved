@@ -74,15 +74,6 @@
         }
       },
       {
-        "package": "iOSBasics",
-        "repositoryURL": "http://github.com/SyncServerII/iOSBasics.git",
-        "state": {
-          "branch": "master",
-          "revision": "2905f9413131967efe674dcb93dc93843fb738b5",
-          "version": null
-        }
-      },
-      {
         "package": "iOSDropbox",
         "repositoryURL": "http://github.com/SyncServerII/iOSDropbox.git",
         "state": {
@@ -183,7 +174,7 @@
       },
       {
         "package": "LoggerAPI",
-        "repositoryURL": "https://github.com/IBM-Swift/LoggerAPI.git",
+        "repositoryURL": "https://github.com/Kitura/LoggerAPI.git",
         "state": {
           "branch": null,
           "revision": "e82d34eab3f0b05391082b11ea07d3b70d2f65bb",
@@ -205,15 +196,6 @@
         "state": {
           "branch": "master",
           "revision": "d580f5fb871c557cb2cf9075d13e7aa4dd014334",
-          "version": null
-        }
-      },
-      {
-        "package": "ServerShared",
-        "repositoryURL": "https://github.com/SyncServerII/ServerShared.git",
-        "state": {
-          "branch": "master",
-          "revision": "608397e1e36ba126fd94c942a49ab4e359fb65c0",
           "version": null
         }
       },
